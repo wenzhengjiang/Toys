@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CBC55D281A96F11E00B64D46 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CBC55D271A96F11E00B64D46 /* main.cpp */; };
+		CBDB510F1A96FEB2006569B4 /* grammer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CBDB510E1A96FEB2006569B4 /* grammer.cpp */; };
+		CBDB51121A972D0F006569B4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = CBDB51111A972D0F006569B4 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,10 @@
 /* Begin PBXFileReference section */
 		CBC55D241A96F11E00B64D46 /* RSG */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RSG; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC55D271A96F11E00B64D46 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		CBDB510B1A96F792006569B4 /* grammer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = grammer.h; sourceTree = "<group>"; };
+		CBDB510E1A96FEB2006569B4 /* grammer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = grammer.cpp; sourceTree = "<group>"; };
+		CBDB51101A970B05006569B4 /* poem.g */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = poem.g; sourceTree = "<group>"; };
+		CBDB51111A972D0F006569B4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +47,7 @@
 		CBC55D1B1A96F11E00B64D46 = {
 			isa = PBXGroup;
 			children = (
+				CBDB51111A972D0F006569B4 /* README.md */,
 				CBC55D261A96F11E00B64D46 /* RSG */,
 				CBC55D251A96F11E00B64D46 /* Products */,
 			);
@@ -58,6 +65,9 @@
 			isa = PBXGroup;
 			children = (
 				CBC55D271A96F11E00B64D46 /* main.cpp */,
+				CBDB510B1A96F792006569B4 /* grammer.h */,
+				CBDB510E1A96FEB2006569B4 /* grammer.cpp */,
+				CBDB51101A970B05006569B4 /* poem.g */,
 			);
 			path = RSG;
 			sourceTree = "<group>";
@@ -118,7 +128,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBDB51121A972D0F006569B4 /* README.md in Sources */,
 				CBC55D281A96F11E00B64D46 /* main.cpp in Sources */,
+				CBDB510F1A96FEB2006569B4 /* grammer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +244,7 @@
 				CBC55D2D1A96F11E00B64D46 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
