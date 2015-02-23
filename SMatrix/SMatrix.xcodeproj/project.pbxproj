@@ -1,0 +1,249 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CBDB513B1A9ADD8B006569B4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CBDB513A1A9ADD8B006569B4 /* main.cpp */; };
+		CBDB51431A9ADDD9006569B4 /* SMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CBDB51411A9ADDD9006569B4 /* SMatrix.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CBDB51351A9ADD8B006569B4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		CBDB51371A9ADD8B006569B4 /* SMatrix */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SMatrix; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBDB513A1A9ADD8B006569B4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		CBDB51411A9ADDD9006569B4 /* SMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SMatrix.cpp; sourceTree = "<group>"; };
+		CBDB51421A9ADDD9006569B4 /* SMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMatrix.h; sourceTree = "<group>"; };
+		CBDB51441A9AF0AE006569B4 /* MatrixError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatrixError.h; sourceTree = "<group>"; };
+		CBDB51451A9AFA53006569B4 /* data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CBDB51341A9ADD8B006569B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CBDB512E1A9ADD8B006569B4 = {
+			isa = PBXGroup;
+			children = (
+				CBDB51391A9ADD8B006569B4 /* SMatrix */,
+				CBDB51381A9ADD8B006569B4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CBDB51381A9ADD8B006569B4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CBDB51371A9ADD8B006569B4 /* SMatrix */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CBDB51391A9ADD8B006569B4 /* SMatrix */ = {
+			isa = PBXGroup;
+			children = (
+				CBDB513A1A9ADD8B006569B4 /* main.cpp */,
+				CBDB51411A9ADDD9006569B4 /* SMatrix.cpp */,
+				CBDB51421A9ADDD9006569B4 /* SMatrix.h */,
+				CBDB51441A9AF0AE006569B4 /* MatrixError.h */,
+				CBDB51451A9AFA53006569B4 /* data */,
+			);
+			path = SMatrix;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CBDB51361A9ADD8B006569B4 /* SMatrix */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CBDB513E1A9ADD8B006569B4 /* Build configuration list for PBXNativeTarget "SMatrix" */;
+			buildPhases = (
+				CBDB51331A9ADD8B006569B4 /* Sources */,
+				CBDB51341A9ADD8B006569B4 /* Frameworks */,
+				CBDB51351A9ADD8B006569B4 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SMatrix;
+			productName = SMatrix;
+			productReference = CBDB51371A9ADD8B006569B4 /* SMatrix */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CBDB512F1A9ADD8B006569B4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Wenzheng Jiang";
+				TargetAttributes = {
+					CBDB51361A9ADD8B006569B4 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = CBDB51321A9ADD8B006569B4 /* Build configuration list for PBXProject "SMatrix" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CBDB512E1A9ADD8B006569B4;
+			productRefGroup = CBDB51381A9ADD8B006569B4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CBDB51361A9ADD8B006569B4 /* SMatrix */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CBDB51331A9ADD8B006569B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBDB51431A9ADDD9006569B4 /* SMatrix.cpp in Sources */,
+				CBDB513B1A9ADD8B006569B4 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CBDB513C1A9ADD8B006569B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		CBDB513D1A9ADD8B006569B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		CBDB513F1A9ADD8B006569B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CBDB51401A9ADD8B006569B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CBDB51321A9ADD8B006569B4 /* Build configuration list for PBXProject "SMatrix" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CBDB513C1A9ADD8B006569B4 /* Debug */,
+				CBDB513D1A9ADD8B006569B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CBDB513E1A9ADD8B006569B4 /* Build configuration list for PBXNativeTarget "SMatrix" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CBDB513F1A9ADD8B006569B4 /* Debug */,
+				CBDB51401A9ADD8B006569B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CBDB512F1A9ADD8B006569B4 /* Project object */;
+}
