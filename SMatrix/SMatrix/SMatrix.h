@@ -31,11 +31,14 @@ public:
     // {{1,2,3}, {4,5,6}}
     SMatrix(const std::initializer_list
             <std::initializer_list<int>> &);
+    SMatrix(const std::vector<std::vector<int>> &vvi) {
+        init_with_vvi(vvi);
+    }
     // copy constructor
     SMatrix(const SMatrix &);
     // move constructor
     // leave move-from object in a valid state. its size must be 0*0
-    SMatrix(SMatrix &&);
+    SMatrix(SMatrix &&) noexcept;
     
     // Destructor
     ~SMatrix() { free(); }
@@ -68,14 +71,33 @@ public:
     // A fake Itertor
     
     // set internal pointer to the first element.
-    void begin() const;
+    void begin() const {
+        iter = val;
+    }
     // true if internal point goes past the last element
-    bool end() const;
+    bool end() const {
+        return iter == first_free;
+    }
     // move internal pointer to the next element.
-    void next() const;
+    void next() const {
+        ++iter;
+    }
     // value of element pointed by th internal point.
-    int value() const;
+    int value() const {
+        return *iter;
+    }
     
+    int row() const {
+        for (auto r : ridx) {
+            if (r.second.first >= (iter-val)) {
+                return static_cast<int>(r.first);
+            }
+        }
+        return static_cast<int>(rows());
+    }
+    int col() const {
+        return static_cast<int>(*(cidx + (iter - val)));
+    }
     // A new n*n identity matrix
     static SMatrix identity(int);
     // other operators
@@ -100,15 +122,26 @@ private:
     
     
     void free();
+    void reallocate();
+    void chk_n_alloc();
     void init_with_vvi(const std::vector<std::vector<int>>&);
+    // refill val, cidx and ridx and reajust first_free
+    // Only ridx is reallocated
+    void fill_with_vvi(const std::vector<std::vector<int>>&);
+    void insert(size_type, size_type, int);
+    void remove(size_type, size_type);
+    void update(size_type, size_type, int);
     
     static size_type max_init_size;
     static std::allocator<int> alloc;
     static std::allocator<size_type> alloc_sz;
     
+    static int *alloc_n_copy(const int*, size_t);
+    static size_type *alloc_n_copy(const size_type*, size_t);
     static bool check_format(std::string);
     static std::string serialize(std::vector<int> v);
     static std::vector<int> deserialize(std::string str);
+    static std::vector<std::vector<int>> to_vector(const SMatrix&);
 };
 
 #endif /* defined(__SMatrix__SMatrix__) */
