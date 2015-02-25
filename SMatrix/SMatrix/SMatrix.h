@@ -22,8 +22,7 @@ public:
     //    Given SMatrix a(3, 5), a is constructed as a 3 × 5
     //    matrix (3 rows, 5 columns), with its entries being zero
     SMatrix(size_type, size_type);
-    SMatrix(size_type size = 1) {
-        SMatrix(size, size);
+    SMatrix(size_type size = 1):SMatrix(size, size){
     }
     // same format as the one produced by ouput operator
     SMatrix(std::istream &);

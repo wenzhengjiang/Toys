@@ -37,7 +37,7 @@ void constructorTest()
     SMatrix c(10,10);
     SMatrix d = {{10,10,0}};
     if (c != d) {
-        cout << "List constructor and normal constructor " << endl;
+        cout << "Normal constructor and list constructor " << endl;
         cout << a << "and\n" << b
         << "are not equal" << endl;
         return;
@@ -82,8 +82,11 @@ void memoryTest()
 void computationTest()
 {
     std::ifstream in ("data");
-    SMatrix a (in), b;
-    b = a + SMatrix::identity(7);
+    SMatrix a (in);
+    SMatrix id7 = SMatrix::identity(7);
+    SMatrix b;
+//    cout << b.capacity() << endl;
+    b = a + id7;
     SMatrix c = {
         {7,7,16},
         {0,0,2},{0,3,2},{0,6,3},
@@ -98,10 +101,32 @@ void computationTest()
         cout << "addition" << endl;
         cout << b << c;
     }
-    b -= SMatrix::identity(7);
+    b -= id7;
     if (a != b) {
         cout << "substraction" << endl;
     }
+    if (transpose(id7) != id7) {
+        cout << "transpose" << endl;
+    }
+    a *= id7;
+    if (a != b) {
+        cout << "multiplication" << endl;
+        cout << a << b << endl;
+    }
+    if (c(0,0) != 2 || c(3,4) != 11) {
+        cout << "() operator" << endl;
+    }
+    SMatrix e(5);
+    e.setVal(1, 1, 4);
+    e.setVal(4, 2, 9);
+    e.setVal(1, 3, 8);
+    e.setVal(1, 1, 0);
+    e.setVal(4, 2, 0);
+    e.setVal(1, 3, 9);
+    if (e.size() != 1 || e(1,3) != 9) {
+        cout << "setVal" << endl;
+    }
+    cout << "Operations tests suceed!" << endl;
 }
 
 int main(int argc, const char * argv[]) {

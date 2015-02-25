@@ -33,11 +33,13 @@ static SMatrix::size_type min (SMatrix::size_type x, SMatrix::size_type y)
 }
 
 SMatrix::SMatrix(size_type nr, size_type nc)
-:cidx(nullptr),ncol(nc),nrow(nr)
+:val(nullptr),cidx(nullptr),ncol(nc),nrow(nr)
 {
     size_type sz = min(nrow*ncol/5,max_init_size);
-    val = alloc.allocate(sz);
-    cidx = alloc_sz.allocate(sz);
+    if (sz) {
+        val = alloc.allocate(sz);
+        cidx = alloc_sz.allocate(sz);
+    }
     first_free = val;
     cap = val + sz;
     iter = val;
@@ -161,23 +163,28 @@ SMatrix& SMatrix::operator-=(const SMatrix &rhs)
 SMatrix& SMatrix::operator*=(const SMatrix &rhs)
 {
     vector<vector<int>> ret = {{static_cast<int>(rows()),
-        static_cast<int>(cols()),0}};
+        static_cast<int>(rhs.cols()),0}};
     auto aux_rhs = transpose(rhs);
     for (auto r : ridx) {
         for (auto c : aux_rhs.ridx) {
             size_type lidx = r.second.first;
             size_type ridx = c.second.first;
             int sum = 0;
-            while (lidx <= lidx+r.second.second &&
-                   ridx <= ridx+c.second.second) {
+            while (lidx < r.second.first+r.second.second &&
+                   ridx < c.second.first+c.second.second) {
                 if (cidx[lidx] < aux_rhs.cidx[ridx]) {
                     ++lidx;
                 } else if(cidx[lidx] > aux_rhs.cidx[ridx]) {
                     ++ridx;
-                } else
+                } else {
                     sum += val[lidx] * aux_rhs.val[ridx];
+                    ++lidx;
+                    ++ridx;
+                }
             }
-            ret.push_back({static_cast<int>(r.first),static_cast<int>(c.first),sum});
+            if (sum) {
+                ret.push_back({static_cast<int>(r.first),static_cast<int>(c.first),sum});
+            }
         }
     }
     ret[0][2] = static_cast<int>(ret.size()-1);
@@ -209,7 +216,7 @@ bool SMatrix::setVal(size_type i, size_type j, int v)
     if (!operator()(i,j) && v) {
         chk_n_alloc();
         vvi.push_back({static_cast<int>(i),static_cast<int>(j),v});
-        std::sort(vvi.begin(), vvi.end());
+        std::sort(vvi.begin()+1, vvi.end());
     } else if (operator()(i,j)) {
         for (auto it = vvi.begin(); it != vvi.end(); ++it) {
             if ((*it)[0] == i && (*it)[1] == j) {
@@ -240,14 +247,15 @@ bool operator==(const SMatrix &lhs, const SMatrix &rhs)
 {
     if (lhs.rows() != rhs.rows()
         || lhs.cols() != rhs.cols()
-        || lhs.size() != rhs.size()
-        || memcmp(lhs.val, rhs.val, lhs.size())
-        || memcmp(lhs.cidx, rhs.cidx, lhs.size())
-        || lhs.ridx != rhs.ridx ) {
-        
+        || lhs.size() != rhs.size() ) {
         return false;
     }
-    
+    if (lhs.size() &&
+        ( memcmp(lhs.val, rhs.val, lhs.size())
+        || memcmp(lhs.cidx, rhs.cidx, lhs.size())
+        || lhs.ridx != rhs.ridx)) {
+            return false;
+    }
     return true;
 }
 
@@ -284,7 +292,7 @@ SMatrix transpose(const SMatrix& sm)
         ret.push_back({sm.col(), sm.row(), sm.value()});
     }
     
-    std::sort(ret.begin(), ret.end());
+    std::sort(ret.begin()+1, ret.end());
     return SMatrix(ret);
 }
 
@@ -318,6 +326,7 @@ std::ostream& operator<<(std::ostream &out, const SMatrix &sm)
 void SMatrix::free()
 {
     if (val) {
+        assert(capacity());
         alloc.deallocate(val, capacity());
     }
     if (cidx) {
@@ -362,9 +371,15 @@ void SMatrix::init_with_vvi(const vector<vector<int>>& vvi)
     nrow = vvi[0][0];
     ncol = vvi[0][1];
     int elem = vvi[0][2];
-    val = alloc.allocate(elem);
-    cidx = alloc_sz.allocate(elem);
-    fill_with_vvi(vvi);
+    if (elem) {
+        val = alloc.allocate(elem);
+        cidx = alloc_sz.allocate(elem);
+        fill_with_vvi(vvi);
+    } else {
+        val = nullptr;
+        cidx = nullptr;
+        first_free = val;
+    }
     cap = val + elem;
     iter = val;
 }
