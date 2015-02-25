@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CBDB513B1A9ADD8B006569B4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CBDB513A1A9ADD8B006569B4 /* main.cpp */; };
 		CBDB51431A9ADDD9006569B4 /* SMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CBDB51411A9ADDD9006569B4 /* SMatrix.cpp */; };
+		CBFE50E21A9D74930059FA50 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = CBFE50E11A9D74930059FA50 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,6 +31,7 @@
 		CBDB51421A9ADDD9006569B4 /* SMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMatrix.h; sourceTree = "<group>"; };
 		CBDB51441A9AF0AE006569B4 /* MatrixError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatrixError.h; sourceTree = "<group>"; };
 		CBDB51451A9AFA53006569B4 /* data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data; sourceTree = "<group>"; };
+		CBFE50E11A9D74930059FA50 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +48,7 @@
 		CBDB512E1A9ADD8B006569B4 = {
 			isa = PBXGroup;
 			children = (
+				CBFE50E11A9D74930059FA50 /* README.md */,
 				CBDB51391A9ADD8B006569B4 /* SMatrix */,
 				CBDB51381A9ADD8B006569B4 /* Products */,
 			);
@@ -127,6 +130,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBFE50E21A9D74930059FA50 /* README.md in Sources */,
 				CBDB51431A9ADDD9006569B4 /* SMatrix.cpp in Sources */,
 				CBDB513B1A9ADD8B006569B4 /* main.cpp in Sources */,
 			);
@@ -242,6 +246,7 @@
 				CBDB51401A9ADD8B006569B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
