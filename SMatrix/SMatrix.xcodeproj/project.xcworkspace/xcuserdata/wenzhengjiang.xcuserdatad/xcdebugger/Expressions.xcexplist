@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "SMatrix::operator=(SMatrix&amp;&amp;):SMatrix.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "SMatrix::SMatrix(unsigned long):SMatrix.h">
+      </ContextState>
+      <ContextState
+         contextName = "SMatrix::SMatrix(unsigned long, unsigned long):SMatrix.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "SMatrix::operator*=(SMatrix const&amp;):SMatrix.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "computationTest():main.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "SMatrix::free():SMatrix.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "constructorTest():main.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "d.rows()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SMatrix::SMatrix(std::initializer_list&lt;std::initializer_list&lt;int&gt; &gt; const&amp;):SMatrix.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "vvi">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "deserialize(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;):SMatrix.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "same(std::__1::vector&lt;int, std::__1::allocator&lt;int&gt; &gt; const&amp;, std::__1::vector&lt;int, std::__1::allocator&lt;int&gt; &gt; const&amp;):SMatrix.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "SMatrix::fill_with_vvi(std::__1::vector&lt;std::__1::vector&lt;int, std::__1::allocator&lt;int&gt; &gt;, std::__1::allocator&lt;std::__1::vector&lt;int, std::__1::allocator&lt;int&gt; &gt; &gt; &gt; const&amp;):SMatrix.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "vvi.size()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "std::__1::allocator&lt;int&gt;::deallocate(int*, unsigned long) [inlined]:memory">
+      </ContextState>
+      <ContextState
+         contextName = "std::__1::less&lt;unsigned long&gt;::operator()(unsigned long const&amp;, unsigned long const&amp;) const [inlined]:__functional_base">
+      </ContextState>
+      <ContextState
+         contextName = "SMatrix::to_vector(SMatrix const&amp;):SMatrix.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "*(val+14)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SMatrix::init_with_vvi(std::__1::vector&lt;std::__1::vector&lt;int, std::__1::allocator&lt;int&gt; &gt;, std::__1::allocator&lt;std::__1::vector&lt;int, std::__1::allocator&lt;int&gt; &gt; &gt; &gt; const&amp;):SMatrix.cpp">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

@@ -1,6 +1,6 @@
 ## The Sparse Matrix Library
 
-A Sparse matrix Class with resource control support and normal operations
+A Sparse matrix Class implemented for learning  resource control in C++.
 
 ## Examples
 

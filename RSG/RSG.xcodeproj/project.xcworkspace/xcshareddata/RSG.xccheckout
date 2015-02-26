@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1F6FE7D2-D25A-484A-8E62-B8774C9F9602</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RSG</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>94CF4E932A89926A8ECB6DB4CE37BCE87BC8BE7E</key>
+		<string>github.com:JWZH/Toys.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>RSG/RSG.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>94CF4E932A89926A8ECB6DB4CE37BCE87BC8BE7E</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:JWZH/Toys.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>94CF4E932A89926A8ECB6DB4CE37BCE87BC8BE7E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>94CF4E932A89926A8ECB6DB4CE37BCE87BC8BE7E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>C++Toys</string>
+		</dict>
+	</array>
+</dict>
+</plist>
