@@ -1,7 +1,6 @@
 //
 //  main.cpp
 //  RSG
-//  
 //  Created by Wenzheng Jiang on 20/02/2015.
 //  Copyright (c) 2015 Wenzheng Jiang. All rights reserved.
 //
@@ -36,7 +35,7 @@ string random_expand(string nont, Grammer grm) {
 }
 
 string random_sentence(Grammer grm) {
-    
+
     return random_expand(Grammer::start, grm);
 }
 
@@ -51,6 +50,6 @@ int main(int argc, const char * argv[]) {
     }
     Grammer grm (in);
     cout << random_sentence(grm) << endl;
-   
+
     return 0;
 }

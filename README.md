@@ -1,2 +1,2 @@
 # Toys
-Toy programs written mainly in C++
+Toy programs written for practice
