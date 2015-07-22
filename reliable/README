@@ -1,0 +1,9 @@
+## Reliable
+
+A reliable transport protocol (sliding window) on top of UDP.
+A simple test program was implemented to test its correctness.
+
+## Run
+./reliable -w 100 -t 200 -d 5555 localhost:6666
+
+./reliable -w 100 -t 200 -d 6666 localhost:5555
