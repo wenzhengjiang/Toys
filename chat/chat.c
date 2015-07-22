@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <sys/socket.h>
+#include <netdb.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <limits.h>
@@ -36,7 +37,7 @@ struct conn {
     int rfd;			/* input file descriptor */
     int wfd;			/* output file descriptor */
 
-    struct sockaddr_in peer; /* network peer */
+    char * id;
 
     /* When write_err is true, stop reading and writing and free the conn*/
     bool write_err;
@@ -52,6 +53,7 @@ struct conn {
 typedef struct conn conn_t;
 
 static conn_t *conn_list;
+static size_t idssize;
 
 static struct pollfd *cevents;
 static int ncevents;
@@ -217,6 +219,9 @@ conn_store(conn_t *c, const void *_buf, size_t _n)
 {
     const char *buf = _buf;
     int n = _n;
+#ifdef DEBUG
+        fprintf(stderr, "conn_store: %s\n", _buf);
+#endif
 
     assert (!c->delete_me && conn_bufspace(c));
     if (n > 0) {
@@ -267,9 +272,58 @@ conn_drain (conn_t *c)
     return 0;
 }
 
+void send_user_list(conn_t *dest)
+{
+    char *buf = xmalloc(idssize);
+    int k = 0;
+    for(conn_t *c = conn_list; c; c = c->next) {
+        assert(c->id != NULL);
+        strcpy(buf+k, c->id);
+        k += strlen(c->id);
+    }
+#ifdef DDEBUG
+    buf[k] = '\0'
+    fprintf(stderr, "send_user_liste: %s\n", buf);
+#endif
+    conn_store(dest, buf, k);
+}
 
+conn_t * getconnbyid(char *id) {
+    for (conn_t *c = conn_list; c; c = c->next) {
+        if (strcmp(id, c->id) == 0)
+            return c;
+    }
+    return NULL;
+}
 
+void handle_cmd(conn_t *c, char *buf, int len)
+{
+    buf[len] = '\0';
+#if DEBUG
+    fprintf(stderr, "handle_cmd:");
+    for (int i = 0; i < len; i++)
+    fprintf(stderr, "%c", buf[i]);
+#endif
+    char *errmsg = xmalloc(BUF_SIZE);
 
+    if (strcmp(buf, "list\r\n") == 0) {
+        send_user_list(c);
+    } else {
+        if (len > 5 && buf[0] == 'c' && buf[1] == 'o'
+                && buf[2] == 'n' && buf[3] == 'n' && buf[4] == ' ') {
+            conn_t *dest = getconnbyid(&buf[5]);
+            if (dest == NULL) {
+                sprintf(errmsg, "no such user: %s\n", buf+5);
+                conn_store(c, errmsg, strlen(errmsg));
+            } else {
+                c->wfd = dest->rfd;
+            }
+        } else {
+            sprintf(errmsg, "no such command: %s\n", buf);
+            conn_store(c, errmsg, strlen(errmsg));
+        }
+    }
+}
 
 int
 make_async(int fd)
@@ -297,8 +351,12 @@ void conn_poll()
             /* if reader connection is open and connection buffer is not full */
             if (!c->delete_me && conn_bufspace(c)) {
                 int n = conn_input(c, buf, BUF_SIZE);
-                if (n > 0 && !c->delete_me)
-                    conn_store(c, buf, n);
+                if (n > 0 && !c->delete_me) {
+                    if (c->rfd == c->wfd)  /* command from client who hasn't connected to another client */
+                        handle_cmd(c, buf, n);
+                    else                 /* char message needs to be sent to another client */
+                        conn_store(c, buf, n);
+                }
                 else
                     c->delete_me = true;
 #if DEBUG
@@ -330,6 +388,28 @@ void conn_poll()
     }
 }
 
+/* id = host:port */
+char *gen_id(int sock)
+{
+    struct sockaddr_in addr;
+    socklen_t len = sizeof addr;
+    if(getpeername(sock, (struct sockaddr*)&addr, &len) < 0) {
+        perror("getpeername");
+        return NULL;
+    }
+    char port[8];
+    char host[1024];
+    char service[20];
+    if(getnameinfo((struct sockaddr*)&addr, sizeof addr, host, sizeof host, service, sizeof service, 0) < 0) {
+        perror("getnameinfo");
+        return NULL;
+    }
+    sprintf(port, "%d", ntohs(addr.sin_port));
+    char *buf = xmalloc(strlen(host)+strlen(host)+1);
+    sprintf(buf, "%s:%s", host, port);
+    return buf;
+}
+
 void
 do_server(int listenfd) {
     conn_mkevents ();
@@ -353,6 +433,8 @@ do_server(int listenfd) {
             make_async(cli);
             conn_t *c = conn_alloc();
             c->rfd = c->wfd = cli;
+            c->id = gen_id(cli);
+            idssize += strlen(c->id);
             conn_mkevents();
         }
     }
@@ -371,7 +453,7 @@ main(int argc, char* argv[])
     sa.sa_handler = SIG_IGN;
     sigaction (SIGPIPE, &sa, NULL);
 
-    fprintf(stdout, "----- Echo Server -----\n");
+    fprintf(stdout, "----- Chat Server -----\n");
 
     if ((listenfd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
         perror("socket");
@@ -398,3 +480,4 @@ main(int argc, char* argv[])
 
     return EXIT_SUCCESS;
 }
+

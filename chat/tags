@@ -1,0 +1,54 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BUF_SIZE	chat.c	/^#define BUF_SIZE /;"	d	file:
+CC	Makefile	/^CC = gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -g -Wall -Werror -std=c99 -DDEBUG$/;"	m
+CON_BUF_SIZE	chat.c	/^#define CON_BUF_SIZE /;"	d	file:
+ECHO_PORT	chat.c	/^#define ECHO_PORT /;"	d	file:
+TIME_INF	chat.c	/^#define TIME_INF /;"	d	file:
+buf	chat.c	/^    char buf[1];$/;"	m	struct:chunk	file:
+buf	chat.c	/^static char buf[BUF_SIZE];$/;"	v	file:
+cevents	chat.c	/^static struct pollfd *cevents;$/;"	v	typeref:struct:pollfd	file:
+chunk	chat.c	/^struct chunk {$/;"	s	file:
+chunk_t	chat.c	/^typedef struct chunk chunk_t;$/;"	t	typeref:struct:chunk	file:
+conn	chat.c	/^struct conn {$/;"	s	file:
+conn_alloc	chat.c	/^conn_alloc (void)$/;"	f
+conn_bufspace	chat.c	/^conn_bufspace (conn_t *c)$/;"	f
+conn_drain	chat.c	/^conn_drain (conn_t *c)$/;"	f
+conn_free	chat.c	/^conn_free (conn_t *c)$/;"	f
+conn_input	chat.c	/^conn_input(conn_t *c, void *buf, size_t n)$/;"	f
+conn_list	chat.c	/^static conn_t *conn_list;$/;"	v	file:
+conn_mkevents	chat.c	/^conn_mkevents ()$/;"	f
+conn_poll	chat.c	/^void conn_poll()$/;"	f
+conn_store	chat.c	/^conn_store(conn_t *c, const void *_buf, size_t _n)$/;"	f
+conn_t	chat.c	/^typedef struct conn conn_t;$/;"	t	typeref:struct:conn	file:
+delete_me	chat.c	/^    bool delete_me;$/;"	m	struct:conn	file:
+do_server	chat.c	/^do_server(int listenfd) {$/;"	f
+evreaders	chat.c	/^static conn_t **evreaders, **evwriters;$/;"	v	file:
+evwriters	chat.c	/^static conn_t **evreaders, **evwriters;$/;"	v	file:
+gen_id	chat.c	/^char *gen_id(int sock)$/;"	f
+getconnbyid	chat.c	/^conn_t * getconnbyid(char *id) {$/;"	f
+handle_cmd	chat.c	/^void handle_cmd(conn_t *c, char *buf, int len)$/;"	f
+id	chat.c	/^    char * id;$/;"	m	struct:conn	file:
+idssize	chat.c	/^static size_t idssize;$/;"	v	file:
+main	chat.c	/^main(int argc, char* argv[])$/;"	f
+make_async	chat.c	/^make_async(int fd)$/;"	f
+ncevents	chat.c	/^static int ncevents;$/;"	v	file:
+next	chat.c	/^    struct chunk *next;$/;"	m	struct:chunk	typeref:struct:chunk::chunk	file:
+next	chat.c	/^    struct conn *next; \/* Linked list of connections *\/$/;"	m	struct:conn	typeref:struct:conn::conn	file:
+outq	chat.c	/^    chunk_t *outq; \/* chunks not yet written *\/$/;"	m	struct:conn	file:
+outqtail	chat.c	/^    chunk_t **outqtail;$/;"	m	struct:conn	file:
+prev	chat.c	/^    struct conn ** prev;$/;"	m	struct:conn	typeref:struct:conn::conn	file:
+rfd	chat.c	/^    int rfd;			\/* input file descriptor *\/$/;"	m	struct:conn	file:
+rpoll	chat.c	/^    int rpoll;			\/* offsets into cevents array *\/$/;"	m	struct:conn	file:
+send_user_list	chat.c	/^void send_user_list(conn_t *dest)$/;"	f
+size	chat.c	/^    size_t size;$/;"	m	struct:chunk	file:
+used	chat.c	/^    size_t used;$/;"	m	struct:chunk	file:
+wfd	chat.c	/^    int wfd;			\/* output file descriptor *\/$/;"	m	struct:conn	file:
+wpoll	chat.c	/^    int wpoll;$/;"	m	struct:conn	file:
+write_err	chat.c	/^    bool write_err;$/;"	m	struct:conn	file:
+xmalloc	chat.c	/^xmalloc (size_t n)$/;"	f
