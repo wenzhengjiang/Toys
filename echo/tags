@@ -1,0 +1,86 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Accept	wrapper.c	/^int Accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)$/;"	f
+BUF_SIZE	echo_client.c	/^#define BUF_SIZE /;"	d	file:
+BUF_SIZE	echo_server.c	/^#define BUF_SIZE /;"	d	file:
+Bind	wrapper.c	/^int Bind(int sockfd, struct sockaddr *my_addr, socklen_t addrlen)$/;"	f
+CC	Makefile	/^CC = gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -g -Wall -Werror -std=c99 $(DMALLOC_CFLAGS)$/;"	m
+CON_BUF_SIZE	echo_server.c	/^#define CON_BUF_SIZE /;"	d	file:
+Close	wrapper.c	/^int Close(int sock)$/;"	f
+Connect	wrapper.c	/^int Connect(int sockfd, const struct sockaddr *serv_addr, socklen_t addrlen)$/;"	f
+ECHO_PORT	echo_client.c	/^#define ECHO_PORT /;"	d	file:
+ECHO_PORT	echo_server.c	/^#define ECHO_PORT /;"	d	file:
+Listen	wrapper.c	/^int Listen(int sockfd, int backlog)$/;"	f
+MAX	echo_client.c	/^#define MAX(/;"	d	file:
+RECV_EACH_TIMEOUT	cp1_checker.py	/^RECV_EACH_TIMEOUT = 0.01$/;"	v
+RECV_TOTAL_TIMEOUT	cp1_checker.py	/^RECV_TOTAL_TIMEOUT = 0.1$/;"	v
+Read	wrapper.c	/^ssize_t	 Read(int fd, void *buf, size_t n)$/;"	f
+Shutdown	wrapper.c	/^int Shutdown(int sockfd, int howto)$/;"	f
+Socket	wrapper.c	/^int Socket(int domain, int type, int protocol)$/;"	f
+TIME_INF	echo_server.c	/^#define TIME_INF /;"	d	file:
+Write	wrapper.c	/^ssize_t	 Write(int fd, const void *buf, size_t n)$/;"	f
+buf	echo_server.c	/^    char buf[1];$/;"	m	struct:chunk	file:
+buf	echo_server.c	/^static char buf[BUF_SIZE];$/;"	v	file:
+cevents	echo_server.c	/^static struct pollfd *cevents;$/;"	v	typeref:struct:pollfd	file:
+chunk	echo_server.c	/^struct chunk {$/;"	s	file:
+chunk_t	echo_server.c	/^typedef struct chunk chunk_t;$/;"	t	typeref:struct:chunk	file:
+conn	echo_server.c	/^struct conn {$/;"	s	file:
+conn_alloc	echo_server.c	/^conn_alloc (void)$/;"	f
+conn_bufspace	echo_server.c	/^conn_bufspace (conn_t *c)$/;"	f
+conn_drain	echo_server.c	/^conn_drain (conn_t *c)$/;"	f
+conn_free	echo_server.c	/^conn_free (conn_t *c)$/;"	f
+conn_input	echo_server.c	/^conn_input(conn_t *c, void *buf, size_t n)$/;"	f
+conn_list	echo_server.c	/^static conn_t *conn_list;$/;"	v	file:
+conn_mkevents	echo_server.c	/^conn_mkevents ()$/;"	f
+conn_poll	echo_server.c	/^void conn_poll()$/;"	f
+conn_store	echo_server.c	/^conn_store(conn_t *c, const void *_buf, size_t _n)$/;"	f
+conn_t	echo_server.c	/^typedef struct conn conn_t;$/;"	t	typeref:struct:conn	file:
+data	cp1_checker.py	/^        data = socketSubset[j].recv(randomLen[j])$/;"	v
+delete_me	echo_server.c	/^    bool delete_me;$/;"	m	struct:conn	file:
+do_client	echo_client.c	/^void do_client(int fd, int sockfd) {$/;"	f
+do_server	echo_server.c	/^do_server(int listenfd) {$/;"	f
+err_quit	wrapper.c	/^void err_quit(const char *msg)$/;"	f
+evreaders	echo_server.c	/^static conn_t **evreaders, **evwriters;$/;"	v	file:
+evwriters	echo_server.c	/^static conn_t **evreaders, **evwriters;$/;"	v	file:
+main	echo_client.c	/^int main(int argc, char* argv[])$/;"	f
+main	echo_server.c	/^main(int argc, char* argv[])$/;"	f
+make_async	echo_server.c	/^make_async(int fd)$/;"	f
+ncevents	echo_server.c	/^static int ncevents;$/;"	v	file:
+next	echo_server.c	/^    struct chunk *next;$/;"	m	struct:chunk	typeref:struct:chunk::chunk	file:
+next	echo_server.c	/^    struct conn *next; \/* Linked list of connections *\/$/;"	m	struct:conn	typeref:struct:conn::conn	file:
+numBytes	cp1_checker.py	/^numBytes = int(sys.argv[5])$/;"	v
+numConnections	cp1_checker.py	/^numConnections = int(sys.argv[6])$/;"	v
+numTrials	cp1_checker.py	/^numTrials = int(sys.argv[3])$/;"	v
+numWritesReads	cp1_checker.py	/^numWritesReads = int(sys.argv[4])$/;"	v
+os	cp1_checker.py	/^import os$/;"	i
+outq	echo_server.c	/^    chunk_t *outq; \/* chunks not yet written *\/$/;"	m	struct:conn	file:
+outqtail	echo_server.c	/^    chunk_t **outqtail;$/;"	m	struct:conn	file:
+peer	echo_server.c	/^    struct sockaddr_in peer; \/* network peer *\/$/;"	m	struct:conn	typeref:struct:conn::sockaddr_in	file:
+prev	echo_server.c	/^    struct conn ** prev;$/;"	m	struct:conn	typeref:struct:conn::conn	file:
+random	cp1_checker.py	/^import random$/;"	i
+randomData	cp1_checker.py	/^    randomData = []$/;"	v
+randomLen	cp1_checker.py	/^    randomLen = []$/;"	v
+random_len	cp1_checker.py	/^        random_len = random.randrange(1, numBytes)$/;"	v
+random_string	cp1_checker.py	/^        random_string = os.urandom(random_len)$/;"	v
+rfd	echo_server.c	/^    int rfd;			\/* input file descriptor *\/$/;"	m	struct:conn	file:
+rpoll	echo_server.c	/^    int rpoll;			\/* offsets into cevents array *\/$/;"	m	struct:conn	file:
+s	cp1_checker.py	/^    s = socket(AF_INET, SOCK_STREAM)$/;"	v
+serverHost	cp1_checker.py	/^serverHost = gethostbyname(sys.argv[1])$/;"	v
+serverPort	cp1_checker.py	/^serverPort = int(sys.argv[2])$/;"	v
+size	echo_server.c	/^    size_t size;$/;"	m	struct:chunk	file:
+socketList	cp1_checker.py	/^socketList = []$/;"	v
+socketSubset	cp1_checker.py	/^    socketSubset = []$/;"	v
+socketSubset	cp1_checker.py	/^    socketSubset = random.sample(socketList, numConnections)$/;"	v
+start_time	cp1_checker.py	/^        start_time = time.time()$/;"	v
+sys	cp1_checker.py	/^import sys$/;"	i
+time	cp1_checker.py	/^import time$/;"	i
+used	echo_server.c	/^    size_t used;$/;"	m	struct:chunk	file:
+wfd	echo_server.c	/^    int wfd;			\/* output file descriptor *\/$/;"	m	struct:conn	file:
+wpoll	echo_server.c	/^    int wpoll;$/;"	m	struct:conn	file:
+write_err	echo_server.c	/^    bool write_err;$/;"	m	struct:conn	file:
+xmalloc	echo_server.c	/^xmalloc (size_t n)$/;"	f
