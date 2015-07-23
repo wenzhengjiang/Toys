@@ -43,6 +43,9 @@ struct conn {
     bool write_err;
     /* When delete_me is true, stop reading, and free the conn after draining buffer */
     bool delete_me;
+    /* When reset is true, stop reading, and reset the conn after draining buffer */
+    bool reset;
+
     chunk_t *outq; /* chunks not yet written */
     chunk_t **outqtail;
 
@@ -159,6 +162,9 @@ conn_alloc (void)
 void
 conn_free (conn_t *c)
 {
+#ifdef DEBUG
+    fprintf(stderr, "close %s\n", c->id);
+#endif
     chunk_t *ch, *nch;
 
     for (ch = c->outq; ch; ch = nch) {
@@ -220,7 +226,7 @@ conn_store(conn_t *c, const void *_buf, size_t _n)
     const char *buf = _buf;
     int n = _n;
 #ifdef DEBUG
-        fprintf(stderr, "conn_store: %s\n", _buf);
+        fprintf(stderr, "ready to send %d bytes\n", n);
 #endif
 
     assert (!c->delete_me && conn_bufspace(c));
@@ -272,25 +278,49 @@ conn_drain (conn_t *c)
     return 0;
 }
 
+void conn_reset(conn_t *c) {
+#ifdef DEBUG
+    fprintf(stderr, "wfd:%d, rfd:%d\n", c->wfd, c->rfd);
+#endif
+    assert(c->wfd != c->rfd);
+    c->wfd = c->rfd;
+    if(c->outq) {
+        chunk_t *ch, *nch;
+        for (ch = c->outq; ch; ch = nch) {
+            nch = ch->next;
+            free (ch);
+        }
+        c->outq = NULL;
+    }
+    c->reset = false;
+}
+
 void send_user_list(conn_t *dest)
 {
-    char *buf = xmalloc(idssize);
-    int k = 0;
+    char buf [BUF_SIZE];
+    int k = 0, idx = 0;
     for(conn_t *c = conn_list; c; c = c->next) {
         assert(c->id != NULL);
-        strcpy(buf+k, c->id);
-        k += strlen(c->id);
+        if (strcmp(dest->id, c->id) == 0)
+            sprintf(buf+k, "%d:%s(me)\n", idx++, c->id);
+        else
+            sprintf(buf+k, "%d:%s\n", idx++, c->id);
+        k = strlen(buf);
     }
-#ifdef DDEBUG
-    buf[k] = '\0'
-    fprintf(stderr, "send_user_liste: %s\n", buf);
-#endif
     conn_store(dest, buf, k);
 }
 
-conn_t * getconnbyid(char *id) {
+conn_t * getconnbyidx(int idx) {
+    int k = 0;
+    for (conn_t *c = conn_list; c; c = c->next,k++) {
+        if (idx == k)
+            return c;
+    }
+    return NULL;
+}
+conn_t * getconnbyfd(int rfd) {
     for (conn_t *c = conn_list; c; c = c->next) {
-        if (strcmp(id, c->id) == 0)
+        if (c->rfd == rfd)
             return c;
     }
     return NULL;
@@ -298,29 +328,57 @@ conn_t * getconnbyid(char *id) {
 
 void handle_cmd(conn_t *c, char *buf, int len)
 {
-    buf[len] = '\0';
-#if DEBUG
-    fprintf(stderr, "handle_cmd:");
-    for (int i = 0; i < len; i++)
-    fprintf(stderr, "%c", buf[i]);
-#endif
-    char *errmsg = xmalloc(BUF_SIZE);
+    char msg[BUF_SIZE];
+    if (c->rfd != c->wfd) {
+        if (len == 1) {
+            c->reset = true;
+            /* close connection to dest client */
+            conn_t *dest = getconnbyfd(c->wfd);
+            dest->reset = true;
+            sprintf(msg, "stop talking to %s\n", dest->id);
+            conn_store(c, msg, strlen(msg));
+            sprintf(msg, "stop talking to %s\n", c->id);
+            conn_store(dest, msg, strlen(msg));
+            return ;
+        }
+        buf[len] = '\0';
+        sprintf(msg, ">%s", buf);
+        conn_store(c, msg, strlen(msg));
+        return ;
+    }
+    if (len == 1) {
+         c->delete_me = true;
+         return ;
+    }
+    assert(len > 2);
+    buf[len-=2] = '\0';     /* remove \r\n */
 
-    if (strcmp(buf, "list\r\n") == 0) {
+    if (strcmp(buf, "list") == 0) {
         send_user_list(c);
     } else {
         if (len > 5 && buf[0] == 'c' && buf[1] == 'o'
                 && buf[2] == 'n' && buf[3] == 'n' && buf[4] == ' ') {
-            conn_t *dest = getconnbyid(&buf[5]);
+            conn_t *dest = getconnbyidx(atoi(&buf[5]));
             if (dest == NULL) {
-                sprintf(errmsg, "no such user: %s\n", buf+5);
-                conn_store(c, errmsg, strlen(errmsg));
+                sprintf(msg, "no such user: %s\n", buf+5);
+                conn_store(c, msg, strlen(msg));
+            } else if (dest->wfd != dest->rfd) {
+                /* dest client is talking to another client */
+                sprintf(msg, "%s is talking to ...\n", dest->id);
+                conn_store(c, msg, strlen(msg));
             } else {
+                /* conn two clients */
                 c->wfd = dest->rfd;
-            }
+                dest->wfd = c->rfd;
+                sprintf(msg, "start talking to %s\n", c->id);
+                conn_store(c, msg, strlen(msg));
+                sprintf(msg, "start talking to %s\n", dest->id);
+                conn_store(dest, msg, strlen(msg));
+
+                            }
         } else {
-            sprintf(errmsg, "no such command: %s\n", buf);
-            conn_store(c, errmsg, strlen(errmsg));
+            sprintf(msg, "no such command: %s\n", buf);
+            conn_store(c, msg, strlen(msg));
         }
     }
 }
@@ -351,17 +409,13 @@ void conn_poll()
             /* if reader connection is open and connection buffer is not full */
             if (!c->delete_me && conn_bufspace(c)) {
                 int n = conn_input(c, buf, BUF_SIZE);
-                if (n > 0 && !c->delete_me) {
-                    if (c->rfd == c->wfd)  /* command from client who hasn't connected to another client */
-                        handle_cmd(c, buf, n);
-                    else                 /* char message needs to be sent to another client */
-                        conn_store(c, buf, n);
-                }
+#if DEBUG
+                fprintf(stderr, "received %d bytes\n", n);
+#endif
+                if (n > 0 && !c->delete_me)
+                    handle_cmd(c, buf, n);
                 else
                     c->delete_me = true;
-#if DEBUG
-                fprintf(stderr, "received %d bytes", n);
-#endif
             }
         }
         if (cevents[i].revents & (POLLOUT|POLLHUP|POLLERR)) {
@@ -385,6 +439,8 @@ void conn_poll()
          nc = c->next;
          if (c->delete_me && (c->write_err || !c->outq))
              conn_free(c);
+         else if (c->reset && (c->write_err || !c->outq))
+             conn_reset(c);
     }
 }
 
@@ -434,7 +490,7 @@ do_server(int listenfd) {
             conn_t *c = conn_alloc();
             c->rfd = c->wfd = cli;
             c->id = gen_id(cli);
-            idssize += strlen(c->id);
+            idssize += strlen(c->id) + 1;
             conn_mkevents();
         }
     }
@@ -454,6 +510,7 @@ main(int argc, char* argv[])
     sigaction (SIGPIPE, &sa, NULL);
 
     fprintf(stdout, "----- Chat Server -----\n");
+    fprintf(stdout, "listening on port 9999\n");
 
     if ((listenfd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
         perror("socket");

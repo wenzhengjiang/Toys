@@ -24,6 +24,7 @@ conn_input	chat.c	/^conn_input(conn_t *c, void *buf, size_t n)$/;"	f
 conn_list	chat.c	/^static conn_t *conn_list;$/;"	v	file:
 conn_mkevents	chat.c	/^conn_mkevents ()$/;"	f
 conn_poll	chat.c	/^void conn_poll()$/;"	f
+conn_reset	chat.c	/^void conn_reset(conn_t *c) {$/;"	f
 conn_store	chat.c	/^conn_store(conn_t *c, const void *_buf, size_t _n)$/;"	f
 conn_t	chat.c	/^typedef struct conn conn_t;$/;"	t	typeref:struct:conn	file:
 delete_me	chat.c	/^    bool delete_me;$/;"	m	struct:conn	file:
@@ -31,7 +32,8 @@ do_server	chat.c	/^do_server(int listenfd) {$/;"	f
 evreaders	chat.c	/^static conn_t **evreaders, **evwriters;$/;"	v	file:
 evwriters	chat.c	/^static conn_t **evreaders, **evwriters;$/;"	v	file:
 gen_id	chat.c	/^char *gen_id(int sock)$/;"	f
-getconnbyid	chat.c	/^conn_t * getconnbyid(char *id) {$/;"	f
+getconnbyfd	chat.c	/^conn_t * getconnbyfd(int rfd) {$/;"	f
+getconnbyidx	chat.c	/^conn_t * getconnbyidx(int idx) {$/;"	f
 handle_cmd	chat.c	/^void handle_cmd(conn_t *c, char *buf, int len)$/;"	f
 id	chat.c	/^    char * id;$/;"	m	struct:conn	file:
 idssize	chat.c	/^static size_t idssize;$/;"	v	file:
@@ -43,6 +45,7 @@ next	chat.c	/^    struct conn *next; \/* Linked list of connections *\/$/;"	m	st
 outq	chat.c	/^    chunk_t *outq; \/* chunks not yet written *\/$/;"	m	struct:conn	file:
 outqtail	chat.c	/^    chunk_t **outqtail;$/;"	m	struct:conn	file:
 prev	chat.c	/^    struct conn ** prev;$/;"	m	struct:conn	typeref:struct:conn::conn	file:
+reset	chat.c	/^    bool reset;$/;"	m	struct:conn	file:
 rfd	chat.c	/^    int rfd;			\/* input file descriptor *\/$/;"	m	struct:conn	file:
 rpoll	chat.c	/^    int rpoll;			\/* offsets into cevents array *\/$/;"	m	struct:conn	file:
 send_user_list	chat.c	/^void send_user_list(conn_t *dest)$/;"	f
