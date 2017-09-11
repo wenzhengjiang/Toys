@@ -1,0 +1,25 @@
+name:           globber
+version:        1.0.0
+synopsis:       Stanford CS240h Lab 1.
+build-type:     Simple
+cabal-version:  >= 1.8
+
+extra-source-files:
+  README.md
+
+library
+  exposed-modules:
+    Globber
+  build-depends:
+    base < 5
+  ghc-options: -Wall
+
+test-suite test-globber
+  type: exitcode-stdio-1.0
+  main-is: TestGlobber.hs
+  build-depends:
+    base < 5,
+    globber,
+    hspec
+  ghc-options: -Wall
+
